@@ -30,28 +30,9 @@ namespace AppTransporte
                     case 0:
                         if (cantOmnibus < 5)
                         {
-                            Console.WriteLine("Ingrese la cantidad de pasajeros: ");
-                            do
-                            {
-                                while (!int.TryParse(Console.ReadLine(), out cantPasajeros))
-                                {
-                                    Console.WriteLine("Debe ingresar un número válido. Intente nuevamente: ");
-                                }
-
-                                if (cantPasajeros > 100)
-                                {
-                                    Console.WriteLine("La cantidad de pasajeros no puede ser mayor a 100. Intente nuevamente:");
-                                }
-                                if (cantPasajeros < 0)
-                                {
-                                    Console.WriteLine("La cantidad de pasajeros no puede ser menor a 0. Intente nuevamente:");
-                                }
-
-                            } while (cantPasajeros > 100 || cantPasajeros < 0);
-
+                            cantPasajeros = GetCantidadPasajeros(100, 0, "Omnibus");
                             Omnibus omnibus = new Omnibus(cantPasajeros);
-                            Console.WriteLine(omnibus.Avanzar());
-                            Console.WriteLine(omnibus.Detenerse());
+                            ArrancarVehiculo(omnibus);
                             listaTransportes.Add(omnibus);
                             cantOmnibus++;
                             break;  
@@ -64,27 +45,9 @@ namespace AppTransporte
                     case 1:
                         if (cantTaxis < 5)
                         {
-                            Console.WriteLine("Ingrese la cantidad de pasajeros: ");
-                            do
-                            {
-                                while (!int.TryParse(Console.ReadLine(), out cantPasajeros))
-                                {
-                                    Console.WriteLine("Debe ingresar un número válido. Intente nuevamente: ");
-                                }
-
-                                if (cantPasajeros > 4)
-                                {
-                                    Console.WriteLine("La cantidad de pasajeros no puede ser mayor a 4. Intente nuevamente:");
-                                }
-                                if (cantPasajeros < 0)
-                                {
-                                    Console.WriteLine("La cantidad de pasajeros no puede ser menor a 0. Intente nuevamente:");
-                                }
-
-                            } while (cantPasajeros > 4 || cantPasajeros < 0);
+                            cantPasajeros = GetCantidadPasajeros(4, 0, "taxi");
                             Taxi taxi = new Taxi(cantPasajeros);
-                            Console.WriteLine(taxi.Avanzar());
-                            Console.WriteLine(taxi.Detenerse());
+                            ArrancarVehiculo(taxi);
                             listaTransportes.Add(taxi);
                             cantTaxis++;
                             break;
@@ -99,16 +62,52 @@ namespace AppTransporte
                         Console.WriteLine("El tipo de transporte ingresado no es correcto");
                         break;
                     }
-            } while (cantOmnibus < 5 || cantTaxis < 5);
+            } while (cantOmnibus < 1 || cantTaxis < 1);
 
+            ResultadoFinal(listaTransportes);
+            Console.ReadKey();
+        }
+
+        static int GetCantidadPasajeros(int maxPasajeros, int minPasajeros, string tipoVehiculo)
+        {
+            int cantPasajeros;
+            Console.WriteLine($"Ingrese la cantidad de pasajeros del {tipoVehiculo}: ");
+            do
+            {
+                while (!int.TryParse(Console.ReadLine(), out cantPasajeros))
+                {
+                    Console.WriteLine("Debe ingresar un número válido. Intente nuevamente: ");
+                }
+
+                if (cantPasajeros > maxPasajeros)
+                {
+                    Console.WriteLine($"La cantidad de pasajeros no puede ser mayor a {maxPasajeros}. Intente nuevamente:");
+                }
+                if (cantPasajeros < minPasajeros)
+                {
+                    Console.WriteLine("La cantidad de pasajeros no puede ser menor a 0. Intente nuevamente:");
+                }
+
+            } while (cantPasajeros > maxPasajeros || cantPasajeros < minPasajeros);
+
+            return cantPasajeros;
+        }
+
+        static void ArrancarVehiculo(TransportePublico transporte)
+        {
+            Console.WriteLine(transporte.Avanzar());
+            Console.WriteLine(transporte.Detenerse());
+        }
+
+        static void ResultadoFinal(List<TransportePublico> transportes)
+        {
             Console.WriteLine("============================================================================");
             Console.WriteLine("Lista de transportes: ");
-            foreach (var transporte in listaTransportes)
+            foreach (var transporte in transportes)
             {
-                Console.WriteLine(transporte.GetType().Name + ": " + transporte.getPasajeros + " pasajeros");
+                Console.WriteLine($"{transporte.GetType().Name}: {transporte.getPasajeros} pasajeros");
             }
             Console.WriteLine("============================================================================");
-            Console.ReadKey();
         }
     }
 }
