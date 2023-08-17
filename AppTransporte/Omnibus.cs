@@ -14,7 +14,7 @@ namespace AppTransporte
 
         public override string Avanzar()
         {
-            return $"Omnibus avanzando con {getPasajeros} pasajeros";
+            return $"Omnibus avanzando con {obtenerPasajeros} pasajeros";
         }
 
         public override string Detenerse()

@@ -62,7 +62,7 @@ namespace AppTransporte
                         Console.WriteLine("El tipo de transporte ingresado no es correcto");
                         break;
                     }
-            } while (cantOmnibus < 1 || cantTaxis < 1);
+            } while (cantOmnibus < 5 || cantTaxis < 5);
 
             ResultadoFinal(listaTransportes);
             Console.ReadKey();
@@ -105,7 +105,7 @@ namespace AppTransporte
             Console.WriteLine("Lista de transportes: ");
             foreach (var transporte in transportes)
             {
-                Console.WriteLine($"{transporte.GetType().Name}: {transporte.getPasajeros} pasajeros");
+                Console.WriteLine($"{transporte.GetType().Name}: {transporte.obtenerPasajeros} pasajeros");
             }
             Console.WriteLine("============================================================================");
         }

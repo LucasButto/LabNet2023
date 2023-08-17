@@ -10,10 +10,10 @@ namespace AppTransporte
     {
         public TransportePublico(int pasajeros)
         {
-            getPasajeros = pasajeros;
+            obtenerPasajeros = pasajeros;
         }
 
-        public int getPasajeros { get; set; }
+        public int obtenerPasajeros { get; set; }
 
         public abstract string Avanzar();
 
