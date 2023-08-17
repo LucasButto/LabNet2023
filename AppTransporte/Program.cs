@@ -30,7 +30,7 @@ namespace AppTransporte
                     case 0:
                         if (cantOmnibus < 5)
                         {
-                            cantPasajeros = GetCantidadPasajeros(100, 0, "Omnibus");
+                            cantPasajeros = ObtenerCantidadPasajeros(100, 0, "Omnibus");
                             Omnibus omnibus = new Omnibus(cantPasajeros);
                             ArrancarVehiculo(omnibus);
                             listaTransportes.Add(omnibus);
@@ -45,7 +45,7 @@ namespace AppTransporte
                     case 1:
                         if (cantTaxis < 5)
                         {
-                            cantPasajeros = GetCantidadPasajeros(4, 0, "taxi");
+                            cantPasajeros = ObtenerCantidadPasajeros(4, 0, "taxi");
                             Taxi taxi = new Taxi(cantPasajeros);
                             ArrancarVehiculo(taxi);
                             listaTransportes.Add(taxi);
@@ -68,7 +68,7 @@ namespace AppTransporte
             Console.ReadKey();
         }
 
-        static int GetCantidadPasajeros(int maxPasajeros, int minPasajeros, string tipoVehiculo)
+        static int ObtenerCantidadPasajeros(int maxPasajeros, int minPasajeros, string tipoVehiculo)
         {
             int cantPasajeros;
             Console.WriteLine($"Ingrese la cantidad de pasajeros del {tipoVehiculo}: ");
