@@ -18,6 +18,7 @@ namespace PracticaN2
             catch (DivideByZeroException ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
+                throw;
             }
             finally
             {

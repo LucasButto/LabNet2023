@@ -49,21 +49,7 @@ namespace PracticaN2
                 Console.WriteLine("------------------------------------------");
             }
 
-
-            RealizarPruebasUnitarias(calculadora);
-
             Console.ReadLine();
-        }
-
-        static void RealizarPruebasUnitarias(Calculadora calculadora)
-        {
-            Console.WriteLine("Prueba 1: División con validación");
-            calculadora.RealizarDivisionConValidacion("10", "2");
-            Console.WriteLine("---------------------------");
-
-            Console.WriteLine("Prueba 2: División con valores inválidos");
-            calculadora.RealizarDivisionConValidacion("10", "0");
-            Console.WriteLine("---------------------------");
         }
     }
 }
