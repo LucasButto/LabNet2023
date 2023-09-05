@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess The Number!</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"
+      defer
+    ></script>
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="instructions">
+        <h1>Guess The Number!</h1>
+        <p>
+          We have selected a random number between 1 and 50. See if you can
+          guess it in 10 turns or fewer. We'll tell you if your guess was too
+          high or too low.
+        </p>
+      </div>
+      <form>
+        <label class="guess-field-label">Enter a number: </label>
+        <div class="input-button">
+          <input
+            type="number"
+            min="1"
+            max="50"
+            class="guess-field-input"
+            required
+            disabled
+          />
+          <button type="submit" class="guess-submit-button" disabled>
+            Go!
+          </button>
+        </div>
+      </form>
+      <div class="result">
+        <p class="result-text"></p>
+        <button
+          class="guess-submit-button reset-button"
+          type="button"
+          style="display: none"
+        ></button>
+      </div>
+      <div class="hints">
+        <p class="guess-field-label">Hints:</p>
+        <ul>
+          <li class="hint"><span class="material-symbols-rounded"></span></li>
+          <li class="hint"><span class="material-symbols-rounded"></span></li>
+          <li class="hint"><span class="material-symbols-rounded"></span></li>
+          <li class="hint"><span class="material-symbols-rounded"></span></li>
+          <li class="hint"><span class="material-symbols-rounded"></span></li>
+        </ul>
+      </div>
+
+      <div class="scores">
+        <div class="score">
+          <span>Actual: </span>
+          <p class="actual">0</p>
+        </div>
+        <div class="score">
+          <span>Highscore: </span>
+          <p class="highscore">0</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
