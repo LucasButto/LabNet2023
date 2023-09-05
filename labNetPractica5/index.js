@@ -4,13 +4,28 @@ document.addEventListener("DOMContentLoaded", function () {
   let targetNumber = Math.floor(Math.random() * maxNumber) + 1;
   let attempts = 0;
   let score = 0;
-  let highscore = 0;
-  console.log(targetNumber);
+
+  let highscore = localStorage.getItem("highscore");
+
   const body = document.body;
   const input = document.querySelector(".guess-field-input");
   const hintsList = document.querySelectorAll(".hint");
   const actualScore = document.querySelector(".actual");
   const highscoreDisplay = document.querySelector(".highscore");
+
+  if (!highscore) {
+    console.log("Entre");
+    highscore = 0;
+  } else {
+    highscore = parseInt(highscore);
+  }
+
+  highscoreDisplay.textContent = highscore;
+
+  function updateHighscore() {
+    highscoreDisplay.textContent = highscore;
+    localStorage.setItem("highscore", highscore);
+  }
 
   function updateHints(guess) {
     const hintItem = hintsList[attempts - 1];
@@ -39,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
       score++;
       if (score > highscore) {
         highscore = score;
-        highscoreDisplay.textContent = highscore;
+        updateHighscore();
       }
       resultText.textContent = `Congratulations! The number was ${targetNumber}.`;
       document.querySelector(".reset-button").style.display = "block";
