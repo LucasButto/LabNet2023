@@ -124,6 +124,13 @@ form {
   cursor: not-allowed;
 }
 
+.error-message {
+  color: #e6224d;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 .result {
   display: flex;
   flex-direction: column;

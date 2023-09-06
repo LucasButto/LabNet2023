@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const hintsList = document.querySelectorAll(".hint");
   const actualScore = document.querySelector(".actual");
   const highscoreDisplay = document.querySelector(".highscore");
+  const errorMessage = document.querySelector(".error-message");
 
   if (!highscore) {
     console.log("Entre");
@@ -87,8 +88,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const guess = parseInt(input.value, 10);
     if (guess >= minNumber && guess <= maxNumber) {
       checkGuess(guess);
+      errorMessage.textContent = "";
     } else {
-      alert(`Please enter a number between ${minNumber} and ${maxNumber}.`);
+      errorMessage.textContent = `Please enter a number between ${minNumber} and ${maxNumber}.`;
     }
     input.value = "";
   });
