@@ -1,5 +1,10 @@
 @import "~material-icons/iconfont/material-icons.css";
 
+main {
+  height: 100vh;
+  width: 100%;
+}
+
 .navbar-brand:hover {
   transform: scale(1.05);
   transition: transform 0.2s ease-in-out;
@@ -29,4 +34,47 @@
 .light-mode .custom-light-bg {
   background-color: #fff;
   color: #000;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.filter {
+  width: 100%;
+}
+
+.dark-theme table {
+  background: #333;
+  color: #fff;
+}
+
+.dark-theme tr:nth-child(even) {
+  background: #2c3034;
+  color: #fff;
+}
+
+.dark-theme tr:nth-child(odd) {
+  background: #212529;
+  color: #fff;
+}
+
+.dark-theme th {
+  background: #003165;
+  color: #fff;
+}
+
+.error-filter {
+  color: rgb(204, 0, 0);
+  font-size: 1rem;
+  padding: 20px 20px;
+}
+
+.dark-theme mat-paginator {
+  background: #333;
+  color: #fff;
 }

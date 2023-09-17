@@ -58,4 +58,18 @@ export class APIService {
       })
     );
   }
+
+  showAddSuccessMessage() {
+    this.notificationService.showSuccess('Proveedor agregado correctamente.');
+  }
+
+  showUpdateSuccessMessage() {
+    this.notificationService.showSuccess(
+      'Proveedor actualizado correctamente.'
+    );
+  }
+
+  showDeleteSuccessMessage() {
+    this.notificationService.showSuccess('Proveedor eliminado correctamente.');
+  }
 }

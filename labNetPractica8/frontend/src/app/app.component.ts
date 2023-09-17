@@ -1,19 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddModalComponent } from './Components/add-modal/add-modal.component';
 import { DeleteModalComponent } from './Components/delete-modal/delete-modal.component';
 import { APIService } from './API/apiservice.service';
 import { NotificationsService } from './Services/notifications-service.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'Suppliers';
   SuppliersList: any[] = [];
   selectedSupplier: any = {};
+  darkMode: boolean = false;
+  displayedColumns: string[] = [
+    'ContactName',
+    'CompanyName',
+    'Phone',
+    'PostalCode',
+    'Actions',
+  ];
+  dataSource = new MatTableDataSource<any>(this.SuppliersList);
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     public dialog: MatDialog,
@@ -25,10 +40,16 @@ export class AppComponent implements OnInit {
     this.loadSuppliers();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   loadSuppliers() {
     this.apiService.getSuppliers().subscribe(
       (data: any) => {
         this.SuppliersList = data;
+        this.dataSource.data = data;
       },
       (error) => {
         this.notificationsService.showError(
@@ -96,6 +117,7 @@ export class AppComponent implements OnInit {
       if (result) {
         this.apiService.deleteSupplier(supplier.SupplierID).subscribe(
           (response) => {
+            this.apiService.showDeleteSuccessMessage();
             this.loadSuppliers();
           },
           (error) => {
@@ -106,9 +128,45 @@ export class AppComponent implements OnInit {
     });
   }
 
-  darkMode: boolean = false;
-
   toggleDarkMode() {
     this.darkMode = !this.darkMode;
+  }
+
+  applySorting(event: any) {
+    const column = event.active;
+    const direction = event.direction;
+
+    if (!this.dataSource.sort) {
+      return;
+    }
+
+    if (direction === '') {
+      this.dataSource.sort.active = '';
+      this.dataSource.sort.direction = '';
+    } else {
+      this.dataSource.sortingDataAccessor = (item, property) => {
+        switch (property) {
+          case 'ContactName':
+            return item.ContactName;
+          case 'CompanyName':
+            return item.CompanyName;
+          case 'Phone':
+            return item.Phone;
+          case 'PostalCode':
+            return item.PostalCode;
+          default:
+            return '';
+        }
+      };
+    }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.dataSource.filter = filterValue;
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

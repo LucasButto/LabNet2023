@@ -60,6 +60,7 @@ export class AddModalComponent implements OnInit {
           .putSupplier(supplierId, this.supplierForm.value)
           .subscribe(
             (response) => {
+              this.apiService.showUpdateSuccessMessage();
               this.dialogRef.close();
             },
             (error) => {
@@ -71,6 +72,7 @@ export class AddModalComponent implements OnInit {
           (response) => {
             this.dialogRef.close();
             this.data.loadSuppliers();
+            this.apiService.showAddSuccessMessage();
           },
           (error) => {
             console.error('Error al agregar proveedor:', error);
