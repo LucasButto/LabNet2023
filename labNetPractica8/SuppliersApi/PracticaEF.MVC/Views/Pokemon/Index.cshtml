@@ -1,0 +1,39 @@
+﻿@model List<PracticaEF.MVC.Models.PokemonInfo>
+
+@{
+    ViewBag.Title = "Lista de Pokémon de Kanto";
+}
+
+<style>
+    .pokemon-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+
+<h2>Lista de Pokémon de Kanto</h2>
+<br />
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pokemon in Model)
+            {
+                <tr>
+                    <td class="pokemon-info">
+                        @pokemon.Name
+                        <a href="@pokemon.Url" class="btn btn-primary" target="_blank">Detalles</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

@@ -1,0 +1,26 @@
+<h1
+  mat-dialog-title
+  [ngClass]="{ 'custom-dark-bg': darkMode, 'custom-light-bg': !darkMode }"
+  class="mb-0"
+>
+  Eliminar Proveedor
+</h1>
+<mat-dialog-content
+  [ngClass]="{ 'custom-dark-bg': darkMode, 'custom-light-bg': !darkMode }"
+>
+  <p>
+    ¿Estás seguro de que deseas eliminar al proveedor
+    {{ data.supplier.ContactName }} de {{ data.supplier.CompanyName }}?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions
+  [ngClass]="{ 'custom-dark-bg': darkMode, 'custom-light-bg': !darkMode }"
+  class="d-flex justify-content-end"
+>
+  <button mat-button class="btn btn-danger" (click)="onConfirmDelete()">
+    Eliminar
+  </button>
+  <button mat-button class="btn btn-secondary mx-2" (click)="onCancel()">
+    Cancelar
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,27 @@
+.custom-dark-bg {
+  background-color: #333; /* Cambia esto al color de fondo deseado en el modo oscuro */
+  color: white; /* Cambia esto al color de texto deseado en el modo oscuro */
+}
+
+.custom-light-bg {
+  background-color: #f5f5f5; /* Cambia esto al color de fondo deseado en el modo claro */
+  color: #333; /* Cambia esto al color de texto deseado en el modo claro */
+}
+
+.custom-dark-text {
+  color: white; /* Color de texto en modo oscuro */
+}
+
+.custom-light-text {
+  color: #333; /* Color de texto en modo claro */
+}
+
+.custom-dark-bg {
+  background-color: #333; /* Fondo en modo oscuro */
+  /* Otros estilos para modo oscuro */
+}
+
+.custom-light-bg {
+  background-color: #f5f5f5; /* Fondo en modo claro */
+  /* Otros estilos para modo claro */
+}

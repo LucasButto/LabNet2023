@@ -1,0 +1,168 @@
+<h1
+  mat-dialog-title
+  [ngClass]="{ 'custom-dark-bg': darkMode, 'custom-light-bg': !darkMode }"
+  class="mb-0"
+>
+  {{ editMode ? "Editar Proveedor" : "Agregar Proveedor" }}
+</h1>
+<mat-dialog-content
+  [ngClass]="{ 'custom-dark-bg': darkMode, 'custom-light-bg': !darkMode }"
+>
+  <form *ngIf="supplierForm" [formGroup]="supplierForm" class="container">
+    <div class="form-group">
+      <label for="ContactName">Nombre de contacto</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ContactName"
+        name="ContactName"
+        formControlName="ContactName"
+        required
+        (blur)="onBlur('ContactName')"
+      />
+      <div
+        *ngIf="
+          supplierForm.get('ContactName')?.hasError('required') &&
+          isFieldTouched('ContactName')
+        "
+        class="text-danger"
+      >
+        El campo Nombre de contacto es obligatorio.
+      </div>
+      <div
+        *ngIf="
+          supplierForm.get('ContactName')?.hasError('maxlength') &&
+          isFieldTouched('ContactName')
+        "
+        class="text-danger"
+      >
+        La longitud máxima es 30 caracteres.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="CompanyName">Nombre de la compañía</label>
+      <input
+        type="text"
+        class="form-control"
+        id="CompanyName"
+        name="CompanyName"
+        formControlName="CompanyName"
+        required
+        (blur)="onBlur('CompanyName')"
+      />
+      <div
+        *ngIf="
+          supplierForm.get('CompanyName')?.hasError('required') &&
+          isFieldTouched('CompanyName')
+        "
+        class="text-danger"
+      >
+        El campo Nombre de la compañía es obligatorio.
+      </div>
+      <div
+        *ngIf="
+          supplierForm.get('CompanyName')?.hasError('maxlength') &&
+          isFieldTouched('CompanyName')
+        "
+        class="text-danger"
+      >
+        La longitud máxima es 40 caracteres.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="Phone">Teléfono</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Phone"
+        name="Phone"
+        formControlName="Phone"
+        required
+        (blur)="onBlur('Phone')"
+        pattern="^[\d+\(\)\*,\-\s]*$"
+      />
+      <div
+        *ngIf="
+          supplierForm.get('Phone')?.hasError('required') &&
+          isFieldTouched('Phone')
+        "
+        class="text-danger"
+      >
+        El campo Teléfono es obligatorio.
+      </div>
+      <div
+        *ngIf="
+          supplierForm.get('Phone')?.hasError('minlength') &&
+          isFieldTouched('Phone')
+        "
+        class="text-danger"
+      >
+        El número de teléfono debe tener al menos 10 caracteres.
+      </div>
+      <div
+        *ngIf="
+          supplierForm.get('Phone')?.hasError('maxlength') &&
+          isFieldTouched('Phone')
+        "
+        class="text-danger"
+      >
+        La longitud máxima es 24 caracteres.
+      </div>
+      <div
+        *ngIf="
+          supplierForm.get('Phone')?.hasError('pattern') &&
+          isFieldTouched('Phone')
+        "
+        class="text-danger"
+      >
+        El número de teléfono no es válido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="PostalCode">Código Postal</label>
+      <input
+        type="text"
+        class="form-control"
+        id="PostalCode"
+        name="PostalCode"
+        formControlName="PostalCode"
+        required
+        (blur)="onBlur('PostalCode')"
+      />
+      <div
+        *ngIf="
+          supplierForm.get('PostalCode')?.hasError('required') &&
+          isFieldTouched('PostalCode')
+        "
+        class="text-danger"
+      >
+        El campo Código Postal es obligatorio.
+      </div>
+      <div
+        *ngIf="
+          supplierForm.get('PostalCode')?.hasError('maxlength') &&
+          isFieldTouched('PostalCode')
+        "
+        class="text-danger"
+      >
+        La longitud máxima es 10 caracteres.
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions
+  [ngClass]="{ 'custom-dark-bg': darkMode, 'custom-light-bg': !darkMode }"
+  class="d-flex justify-content-end"
+>
+  <button
+    mat-button
+    class="btn btn-success"
+    (click)="onAdd()"
+    [disabled]="!supplierForm.valid"
+  >
+    {{ editMode ? "Guardar" : "Agregar" }}
+  </button>
+  <button mat-button class="btn btn-danger mx-2" (click)="onCancel()">
+    Cancelar
+  </button>
+</mat-dialog-actions>
