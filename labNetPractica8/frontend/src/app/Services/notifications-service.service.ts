@@ -18,7 +18,7 @@ export class NotificationsService {
   showSuccess(message: string) {
     this.snackBar.open(message, 'Cerrar', {
       duration: 5000,
-      panelClass: ['success-snackbar'], // Agrega una clase para el estilo de éxito
+      panelClass: ['success-snackbar'],
       verticalPosition: 'top',
     });
   }
