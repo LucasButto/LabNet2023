@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { APIService } from '../../API/apiservice.service';
+import { NotificationsService } from '../../Services/notifications-service.service';
 
 @Component({
   selector: 'app-add-modal',
@@ -32,7 +33,8 @@ export class AddModalComponent implements OnInit {
     public dialogRef: MatDialogRef<AddModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private apiService: APIService
+    private apiService: APIService,
+    private notificationsService: NotificationsService
   ) {
     this.darkMode = this.data.darkMode;
   }
@@ -60,11 +62,15 @@ export class AddModalComponent implements OnInit {
           .putSupplier(supplierId, this.supplierForm.value)
           .subscribe(
             (response) => {
-              this.apiService.showUpdateSuccessMessage();
+              this.notificationsService.showSuccess(
+                'Proveedor actualizado exitosamente.'
+              );
               this.dialogRef.close();
             },
             (error) => {
-              console.error('Error al editar proveedor:', error);
+              this.notificationsService.showError(
+                'Error al actualizar proveedor.'
+              );
             }
           );
       } else {
@@ -72,10 +78,12 @@ export class AddModalComponent implements OnInit {
           (response) => {
             this.dialogRef.close();
             this.data.loadSuppliers();
-            this.apiService.showAddSuccessMessage();
+            this.notificationsService.showSuccess(
+              'Proveedor agregado exitosamente.'
+            );
           },
           (error) => {
-            console.error('Error al agregar proveedor:', error);
+            this.notificationsService.showError('Error al agregar proveedor.');
           }
         );
       }

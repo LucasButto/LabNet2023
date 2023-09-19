@@ -86,7 +86,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   openDialog(editMode: boolean = false): void {
     if (editMode && !this.selectedSupplier) {
-      console.error('No se ha seleccionado un proveedor para editar.');
+      this.notificationsService.showError(
+        'No se ha seleccionado un proveedor.'
+      );
       return;
     }
 
@@ -117,11 +119,15 @@ export class AppComponent implements OnInit, AfterViewInit {
       if (result) {
         this.apiService.deleteSupplier(supplier.SupplierID).subscribe(
           (response) => {
-            this.apiService.showDeleteSuccessMessage();
+            this.notificationsService.showSuccess(
+              'Proveedor eliminado correctamente.'
+            );
             this.loadSuppliers();
           },
           (error) => {
-            console.error('Error al eliminar proveedor:', error);
+            this.notificationsService.showError(
+              'Hubo un error al eliminar el proveedor.'
+            );
           }
         );
       }
