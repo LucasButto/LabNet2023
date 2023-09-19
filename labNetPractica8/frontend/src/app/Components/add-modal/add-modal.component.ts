@@ -87,6 +87,9 @@ export class AddModalComponent implements OnInit {
           }
         );
       }
+    } else {
+      this.notificationsService.showError('Formulario inválido.');
+      this.supplierForm.markAllAsTouched();
     }
   }
 
