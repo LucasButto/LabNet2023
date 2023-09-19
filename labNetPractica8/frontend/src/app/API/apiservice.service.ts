@@ -10,17 +10,12 @@ import { NotificationsService } from '../Services/notifications-service.service'
 export class APIService {
   private apiUrl = 'https://localhost:44329/api/Suppliers';
 
-  constructor(
-    private http: HttpClient,
-    private notificationService: NotificationsService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   getSuppliers() {
     return this.http.get(this.apiUrl).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.notificationService.showError(
-          'Error al cargar proveedores: ' + error.message
-        );
+        console.log('get error: ', error);
         return throwError(error);
       })
     );
@@ -29,9 +24,7 @@ export class APIService {
   postSupplier(newSupplier: any) {
     return this.http.post(this.apiUrl, newSupplier).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.notificationService.showError(
-          'Error al agregar proveedor: ' + error.message
-        );
+        console.log('post error: ', error);
         return throwError(error);
       })
     );
@@ -40,9 +33,7 @@ export class APIService {
   putSupplier(id: number, updatedSupplier: any) {
     return this.http.put(`${this.apiUrl}/${id}`, updatedSupplier).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.notificationService.showError(
-          'Error al actualizar proveedor: ' + error.message
-        );
+        console.log('put error: ', error);
         return throwError(error);
       })
     );
@@ -51,9 +42,7 @@ export class APIService {
   deleteSupplier(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.notificationService.showError(
-          'Error al eliminar proveedor: ' + error.message
-        );
+        console.log('delete error: ', error);
         return throwError(error);
       })
     );
