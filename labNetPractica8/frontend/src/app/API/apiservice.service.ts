@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { NotificationsService } from '../Services/notifications-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +15,7 @@ export class APIService {
     return this.http.get(this.apiUrl).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log('get error: ', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }
@@ -25,7 +24,7 @@ export class APIService {
     return this.http.post(this.apiUrl, newSupplier).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log('post error: ', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }
@@ -34,7 +33,7 @@ export class APIService {
     return this.http.put(`${this.apiUrl}/${id}`, updatedSupplier).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log('put error: ', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }
@@ -43,7 +42,7 @@ export class APIService {
     return this.http.delete(`${this.apiUrl}/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log('delete error: ', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }

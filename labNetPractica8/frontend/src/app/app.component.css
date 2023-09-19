@@ -69,7 +69,8 @@ th.mat-sort-header-sorted {
 }
 
 .error-filter {
-  color: rgb(204, 0, 0);
+  background: #ff000027;
+  color: #ff0000;
   font-size: 1rem;
   padding: 20px 20px;
 }

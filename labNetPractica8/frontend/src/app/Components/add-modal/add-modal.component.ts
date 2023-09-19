@@ -60,32 +60,32 @@ export class AddModalComponent implements OnInit {
         const supplierId = this.data.supplier.SupplierID;
         this.apiService
           .putSupplier(supplierId, this.supplierForm.value)
-          .subscribe(
-            (response) => {
+          .subscribe({
+            next: (response) => {
               this.notificationsService.showSuccess(
                 'Proveedor actualizado exitosamente.'
               );
               this.dialogRef.close();
             },
-            (error) => {
+            error: (error) => {
               this.notificationsService.showError(
                 'Error al actualizar proveedor.'
               );
-            }
-          );
+            },
+          });
       } else {
-        this.apiService.postSupplier(this.supplierForm.value).subscribe(
-          (response) => {
+        this.apiService.postSupplier(this.supplierForm.value).subscribe({
+          next: (response) => {
             this.dialogRef.close();
             this.data.loadSuppliers();
             this.notificationsService.showSuccess(
               'Proveedor agregado exitosamente.'
             );
           },
-          (error) => {
+          error: (error) => {
             this.notificationsService.showError('Error al agregar proveedor.');
-          }
-        );
+          },
+        });
       }
     } else {
       this.notificationsService.showError('Formulario inválido.');

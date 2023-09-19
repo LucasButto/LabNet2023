@@ -46,17 +46,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   loadSuppliers() {
-    this.apiService.getSuppliers().subscribe(
-      (data: any) => {
+    this.apiService.getSuppliers().subscribe({
+      next: (data: any) => {
         this.SuppliersList = data;
         this.dataSource.data = data;
       },
-      (error) => {
+      error: (error) => {
         this.notificationsService.showError(
           'Hubo un error al cargar los proveedores.'
         );
-      }
-    );
+      },
+    });
   }
 
   openModal(): void {
@@ -115,22 +115,24 @@ export class AppComponent implements OnInit, AfterViewInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.apiService.deleteSupplier(supplier.SupplierID).subscribe(
-          (response) => {
-            this.notificationsService.showSuccess(
-              'Proveedor eliminado correctamente.'
-            );
-            this.loadSuppliers();
-          },
-          (error) => {
-            this.notificationsService.showError(
-              'Hubo un error al eliminar el proveedor.'
-            );
-          }
-        );
-      }
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.apiService.deleteSupplier(supplier.SupplierID).subscribe({
+            next: (response) => {
+              this.notificationsService.showSuccess(
+                'Proveedor eliminado correctamente.'
+              );
+              this.loadSuppliers();
+            },
+            error: (error) => {
+              this.notificationsService.showError(
+                'Hubo un error al eliminar el proveedor.'
+              );
+            },
+          });
+        }
+      },
     });
   }
 
